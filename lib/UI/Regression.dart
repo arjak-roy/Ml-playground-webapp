@@ -16,9 +16,11 @@ class LineChartSample extends StatelessWidget {
         alignment: Alignment.center,
         child: const Text("Learning Rate too high",style: TextStyle(color: Colors.white),),
       ): LineChart(
+        
         duration: Duration(milliseconds: 500),
         curve: Curves.ease,
         LineChartData(
+          
             minX: 0,
             minY: 0,
 

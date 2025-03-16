@@ -1,13 +1,19 @@
 import 'dart:math';
 
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/foundation.dart';
+
 class LinearRegression{
   double _weight=0;
   double _bias=0;
   int epoch;
   List<double> weightHistory = [];
   List<double> biasHistory = [];
-  LinearRegression({required this.epoch, required this.learningRate});
+  List<double> history = [];
   double learningRate;
+  List<double> weightChange = [];
+  List<double> biasChange = [];
+  LinearRegression({required this.epoch, required this.learningRate});
 
   (double,double) gradDesc(List<double> X, List<double> Y, double w, double b) {
     int  n = X.length;
@@ -29,12 +35,16 @@ class LinearRegression{
     double b = 0;
     for (int i = 0; i < epoch; i++) {
       (w,b) = gradDesc(X, Y, w, b);
-      if(i%10000 == 0){
+      if(i%1000 == 0){
        print("Epoch: $i, Weight: $w, Bias: $b");
       weightHistory.add(w);
       biasHistory.add(b);
+      history.add(mse(X, Y));
       }  
-
+      if(i%10000 == 0){
+        weightChange.add(w);
+        biasChange.add(b);
+      }
     }
     _weight = w;
     _bias = b;

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mlplayground/Pages/gradientDescent.dart';
 import 'package:mlplayground/Pages/linearRegression.dart';
 import 'package:mlplayground/Pages/welcome.dart';
+import 'package:mlplayground/provider/Gradient-Descent/GDfit-provider.dart';
+import 'package:mlplayground/provider/Gradient-Descent/Reg-line-provider.dart';
+import 'package:mlplayground/provider/Gradient-Descent/sample-data.dart';
 import 'package:mlplayground/provider/Line%20Provider/AlgoProvider.dart';
 import 'package:mlplayground/provider/Line%20Provider/lineProvider.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +29,15 @@ final _router = GoRouter(
         );
       }
     ),
+    GoRoute(
+      path: '/gradient-descent-simulator',
+      pageBuilder: (context, state){
+        return const MaterialPage(
+          child: Gradientdescent(),
+        );
+      }
+    ),
+
   ],
 );
 
@@ -42,11 +55,13 @@ class MyApp extends StatelessWidget {
     providers: [
       ChangeNotifierProvider(create: (context) => lineprovider(),),
       ChangeNotifierProvider(create: (context) => regLineProvider(),),
-      ChangeNotifierProvider(create: (context)=> LinReg())
+      ChangeNotifierProvider(create: (context)=> LinReg()),
+      ChangeNotifierProvider(create: (context)=>sampleData()),
+      ChangeNotifierProvider(create: (context)=> Gdfitprovider()),
+      ChangeNotifierProvider(create: (context)=> Reglinesprovider()),
     ],
     child:  MaterialApp.router(
       routerConfig: _router,  
-      
     )
     );
   }

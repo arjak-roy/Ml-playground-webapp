@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mlplayground/Pages/gradientDescent.dart';
 import 'package:mlplayground/UI/ontapExpand.dart';
 import 'package:mlplayground/UI/scatter.dart';
 import 'package:mlplayground/UI/Regression.dart';
@@ -17,17 +19,8 @@ class Linearregression extends StatefulWidget {
 class _LinearregressionState extends State<Linearregression> {
   List<double> X = [];
   List<double> Y = [];
-  // int intercept = 0;
-  // int slope = 0;
-  // int sampleSize = 0;
-  // int noise = 1;
   TextEditingController learningrateController = TextEditingController();
   TextEditingController epochController = TextEditingController();
-  // LinearRegression lr = LinearRegression(epoch: 50000, learningRate: 0.0001);
-  // double mse = 0;
-  // double r2 = 0;
-  // double rmse = 0;
-
   @override
   initState() {
     super.initState();
@@ -594,6 +587,71 @@ class _LinearregressionState extends State<Linearregression> {
 
                             ])
                           ]),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(10.0),
+                      width: MediaQuery.of(context).size.width,
+                      height: 0.5,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(child: const Text("How does Linear Regression work? 🧠", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: SelectableText("Simple regression is a statistical method used to model the relationship between a single independent variable (predictor) and a dependent variable (outcome) by fitting a straight line to the data. The goal is to find the line (using the equation \( y = mx + b \)) that minimizes the error between predicted and actual values. This is achieved through gradient descent, an optimization algorithm that iteratively adjusts the slope (\( m \)) and intercept (\( b \)) to minimize the loss function (e.g., mean squared error). As gradient descent progresses, it moves closer to the optimal values until convergence, where the loss stops decreasing.", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: SelectableText("The loss function used here is the sum of squared errors between the predicted values and the actual values. Its is also called the MSE (Mean Squared Error). The equation for finding the MSE is given Below:\n ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: Center(child: SelectableText("J( θ0 , θ1 ) = 1/n * Σ((hθ(x) - y)^2)", style: TextStyle(backgroundColor: const Color.fromARGB(
+                                        255, 244, 163, 163), fontSize: 25, fontWeight: FontWeight.bold),)),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: SelectableText("Where hθ(x) is the predicted value of y for a given input x, θ0 and θ1 are the intercept and slope of the regression line, and n is the sample size.\ni.e. hθ(x) = θ0 + θ1 * x", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SelectableText("The minimization the MSE loss function is achieved through gradient descent, which iteratively adjusts the values of θ0 and θ1 to minimize the loss function. ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                        ],
+                      ),
+                    ),
+Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SelectableText("For more on gradient descent, click ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                          TextButton(onPressed: (){
+                            GoRouter.of(context).go('/gradient-descent-simulator');
+                          }, child: Text('Gradient Descent Simulator'))
+                        ],
+                      ),
                     ),
                     Container(
                       color: Colors.transparent,
