@@ -1,6 +1,6 @@
-# Machine Learning Models Simulator - Flutter Web App
+# Machine Learning Playground  - Flutter Web App
 
-Welcome to the **Machine Learning Models Simulator**! This web application is developed using **Flutter**, offering a sleek and responsive user interface. It serves as a platform to understand and simulate fundamental machine learning algorithms.
+Welcome to the **Machine Learning Playground**! This web application is developed using **Flutter**, offering a sleek and responsive user interface. It serves as a platform to understand and simulate fundamental machine learning algorithms.
 
 ---
 
