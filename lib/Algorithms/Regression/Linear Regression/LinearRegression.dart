@@ -114,11 +114,5 @@ double clip(double value, double threshold) {
     }
     return 1 - mse(X, Y) / sum;
   }
-  // double accuracy(List<double>X, List<double>Y){
-  //   double acc = 0.0;
-  //   for(double i in X){
 
-  //   }
-  //   return acc;
-  // }
 }
