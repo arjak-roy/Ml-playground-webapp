@@ -1,7 +1,19 @@
+  /// Gradient Descent algorithm, which is an optimization algorithm used to find the values of the parameters that minimize the cost function.
+  /// 
+  /// The cost function is the mean squared error between the predictions and the actual values.
+  /// 
+  /// The algorithm works by iteratively updating the parameters in the direction of the negative gradient of the cost function.
+  /// 
+  /// The gradient of the cost function is calculated as the sum of the gradients of the cost function with respect to each parameter, divided by the number of data points.
+  /// 
+  /// The gradients of the cost function with respect to each parameter are calculated as the derivative of the cost function with respect to each parameter, multiplied by the learning rate.
+  /// 
+  /// The learning rate is a hyperparameter that determines how quickly the algorithm converges.
+  /// 
+  /// The algorithm is stopped when the number of epochs reaches the specified limit.
+  ///
 import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/foundation.dart';
 
 class LinearRegression{
   double _weight=0;
@@ -15,21 +27,50 @@ class LinearRegression{
   List<double> biasChange = [];
   LinearRegression({required this.epoch, required this.learningRate});
 
-  (double,double) gradDesc(List<double> X, List<double> Y, double w, double b) {
-    int  n = X.length;
-    double dw = 0;
-    double db = 0;
-    for (int i = 0; i < n; i++) {
-      dw += -(1/n) * (Y[i] - (w*X[i] + b)) * X[i];
-      db += -(1/n) * (Y[i] - (w*X[i] + b));
-    }
+  // (double,double) gradDesc(List<double> X, List<double> Y, double w, double b) {
+  //   int  n = X.length;
+  //   double dw = 0;
+  //   double db = 0;
+  //   for (int i = 0; i < n; i++) {
+  //     dw += -(1/n) * (Y[i] - (w*X[i] + b)) * X[i];
+  //     db += -(1/n) * (Y[i] - (w*X[i] + b));
+  //   }
 
-    double wNow = w - learningRate * dw;
-    double bNow = b - learningRate * db;
-    return (wNow, bNow);
+  //   double wNow = w - learningRate * dw;
+  //   double bNow = b - learningRate * db;
+  //   return (wNow, bNow);
 
+  // }
+double clip(double value, double threshold) {
+  return value.clamp(-threshold, threshold);
+}
+
+(double, double) gradDesc(List<double> X, List<double> Y, double w, double b) {
+  int n = X.length;
+  double dw = 0;
+  double db = 0;
+  for (int i = 0; i < n; i++) {
+    dw += -(1 / n) * (Y[i] - (w * X[i] + b)) * X[i];
+    db += -(1 / n) * (Y[i] - (w * X[i] + b));
   }
+  // Clip gradients
+  dw = clip(dw, 10.0); // Adjust threshold as needed
+  db = clip(db, 10.0);
+  double wNow = w - learningRate * dw;
+  double bNow = b - learningRate * db;
+  return (wNow, bNow);
+}
 
+  /// Fits the linear regression model to the given data by minimizing the cost function using gradient descent.
+  /// 
+  /// The function takes two lists of doubles, X and Y, as input, where X is the list of feature values and Y is the list of target values.
+  /// 
+  /// The function returns a tuple of two doubles, representing the weight and bias of the linear regression model.
+  /// 
+  /// The function also updates the weightHistory, biasHistory, and history lists, which contain the weights, biases, and cost function values at each epoch, respectively.
+  /// 
+  /// The function also updates the weightChange and biasChange lists, which contain the weights and biases at each 10000th epoch, respectively.
+  /// 
   (double,double) fit(List<double> X, List<double> Y) {
     double w = 0;
     double b = 0;
@@ -73,4 +114,11 @@ class LinearRegression{
     }
     return 1 - mse(X, Y) / sum;
   }
+  // double accuracy(List<double>X, List<double>Y){
+  //   double acc = 0.0;
+  //   for(double i in X){
+
+  //   }
+  //   return acc;
+  // }
 }

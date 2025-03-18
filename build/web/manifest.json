@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Explore and visualize machine learning concepts with our interactive simulator. Learn gradient descent, algorithm optimization, and more—all in an intuitive interface.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

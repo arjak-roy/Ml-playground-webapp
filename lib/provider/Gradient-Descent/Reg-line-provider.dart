@@ -13,8 +13,8 @@ class Reglinesprovider extends ChangeNotifier {
       spots: line.getFlSpots(),
                  barWidth: (FlSpots.length > 1)? 1: 3,
               belowBarData: BarAreaData(show: false),
-              dotData: FlDotData(show: false),
-              shadow: (FlSpots.length < 1)? Shadow(color: const Color.fromARGB(255, 255, 255, 255), blurRadius: 5):Shadow(),
+              dotData: const FlDotData(show: false),
+              shadow: (FlSpots.isEmpty)? const Shadow(color: Color.fromARGB(255, 255, 255, 255), blurRadius: 5):const Shadow(),
               color: (FlSpots.isEmpty)?const Color.fromARGB(255, 0, 255, 187):const Color.fromARGB(176, 5, 218, 255)
   ));
     notifyListeners();

@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mlplayground/Pages/gradientDescent.dart';
 import 'package:mlplayground/UI/ontapExpand.dart';
 import 'package:mlplayground/UI/scatter.dart';
 import 'package:mlplayground/UI/Regression.dart';
@@ -24,8 +23,8 @@ class _LinearregressionState extends State<Linearregression> {
   @override
   initState() {
     super.initState();
-    learningrateController.text = 0.0001.toString();
-    epochController.text = 50000.toString();
+    learningrateController.text = 0.01.toString();
+    epochController.text = 500.toString();
   }
 
   @override
@@ -95,10 +94,17 @@ class _LinearregressionState extends State<Linearregression> {
                           child: AspectRatio(
                             aspectRatio: 16 / 9,
                             child: Stack(
-                              children: [  LineChartSample(), Line2chart()],
+                              children: [  LineChartSample(), const Line2chart()],
                             ),
                           ),
                         )),
+                    Container(
+                      child: Text("Correlation of the generated data: ${value.correlation.toStringAsFixed(3)} ",),
+                    
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -122,7 +128,7 @@ class _LinearregressionState extends State<Linearregression> {
                               scrollDirection: Axis.vertical,
                               child: Column(
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Padding(
@@ -131,7 +137,7 @@ class _LinearregressionState extends State<Linearregression> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Learning Rate ( α ): ",
                                               style: TextStyle(
                                                   color: Colors.black),
@@ -150,7 +156,7 @@ class _LinearregressionState extends State<Linearregression> {
                                                   cursorHeight: 12,
                                                   cursorColor: Colors.black,
                                                   textAlign: TextAlign.left,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 15),
                                                   decoration: InputDecoration(
@@ -202,7 +208,7 @@ class _LinearregressionState extends State<Linearregression> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Text(
+                                            const Text(
                                               "Number of Epoches: ",
                                               style: TextStyle(
                                                   color: Colors.black),
@@ -219,7 +225,7 @@ class _LinearregressionState extends State<Linearregression> {
                                                   cursorHeight: 12,
                                                   cursorColor: Colors.black,
                                                   textAlign: TextAlign.left,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 15),
                                                   decoration: InputDecoration(
@@ -270,10 +276,10 @@ class _LinearregressionState extends State<Linearregression> {
                             ),
                           )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text("Sample space control", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                    const Text("Sample space control", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
                     Flex(
                       direction: Axis.horizontal,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -307,9 +313,9 @@ class _LinearregressionState extends State<Linearregression> {
 
                                   setState(() {});
                                 },
-                                child: FittedBox(
+                                child: const FittedBox(
                                   fit: BoxFit.scaleDown,
-                                  child: const Text(
+                                  child: Text(
                                     "Populate",
                                     style: TextStyle(color: Colors.white),
                                   ),
@@ -332,10 +338,9 @@ class _LinearregressionState extends State<Linearregression> {
                                   model.intercept = Random().nextInt(10);
                                   model.slope = Random().nextInt(10);
                                   model.sampleSize = Random().nextInt(65) + 5;
-                                  model.noise = Random().nextInt(9) + 1;
-
+                                  model.noise = Random().nextInt(99) + 1;
                                   value.setLine(model.intercept, model.slope, X, Y,
-                                      model.sampleSize,model.noise);
+                                  model.sampleSize,model.noise);
                                   value.setScatterSpots();
                                   model.lr.fit(X, Y);
                                   value2.setLine(model.lr.bias, model.lr.weight, X);
@@ -348,9 +353,9 @@ class _LinearregressionState extends State<Linearregression> {
                                   print(Y);
                                   setState(() {});
                                 },
-                                child: FittedBox(
+                                child: const FittedBox(
                                   fit: BoxFit.scaleDown,
-                                  child: const Text(
+                                  child: Text(
                                     "Randomize",
                                     style: TextStyle(color: Colors.white),
                                   ),
@@ -388,9 +393,9 @@ class _LinearregressionState extends State<Linearregression> {
                                   model.r2 = 0;
                                   setState(() {});
                                 },
-                                child: FittedBox(
+                                child: const FittedBox(
                                   fit: BoxFit.scaleDown,
-                                  child: const Text(
+                                  child: Text(
                                     "Reset",
                                     style: TextStyle(color: Colors.white),
                                   ),
@@ -510,10 +515,10 @@ class _LinearregressionState extends State<Linearregression> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text("Metrices", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text("Metrices", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 50),
@@ -521,43 +526,43 @@ class _LinearregressionState extends State<Linearregression> {
                           border: TableBorder.all(
                             color: Colors.black,
                             width: 0.5,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                           ),
                           children: [
-                            TableRow(
+                            const TableRow(
                                 children: [
                                   Center(
                                       child: Text(
                                     "MSE",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   )),
                                   Center(
                                       child: Text(
                                     "RMSE",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   )),
                                   Center(
                                       child: Text(
                                     "R2",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   )),
                                   Center(
                                       child: Text(
                                     "Accuracy",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   )),
 
                                 ],
                                 decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
+                                    color: Color.fromARGB(
                                         255, 244, 163, 163))),
                             TableRow(children: [
                               Center(
@@ -578,10 +583,10 @@ class _LinearregressionState extends State<Linearregression> {
                                 style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w300),
                               )),
-                              Center(
+                              const Center(
                                   child: SelectableText(
                                "-",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w300),
                               )),
 
@@ -592,7 +597,7 @@ class _LinearregressionState extends State<Linearregression> {
                       height: 30,
                     ),
                     Container(
-                      margin: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.all(10.0),
                       width: MediaQuery.of(context).size.width,
                       height: 0.5,
                       color: Colors.black,
@@ -602,54 +607,48 @@ class _LinearregressionState extends State<Linearregression> {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      child: Center(child: const Text("How does Linear Regression work? 🧠", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+                      child: const Center(child: Text("How does Linear Regression work? 🧠", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                      child: SelectableText("Simple regression is a statistical method used to model the relationship between a single independent variable (predictor) and a dependent variable (outcome) by fitting a straight line to the data. The goal is to find the line (using the equation \( y = mx + b \)) that minimizes the error between predicted and actual values. This is achieved through gradient descent, an optimization algorithm that iteratively adjusts the slope (\( m \)) and intercept (\( b \)) to minimize the loss function (e.g., mean squared error). As gradient descent progresses, it moves closer to the optimal values until convergence, where the loss stops decreasing.", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: const SelectableText("Simple regression is a statistical method used to model the relationship between a single independent variable (predictor) and a dependent variable (outcome) by fitting a straight line to the data. The goal is to find the line (using the equation \( y = mx + b \)) that minimizes the error between predicted and actual values. This is achieved through gradient descent, an optimization algorithm that iteratively adjusts the slope (\( m \)) and intercept (\( b \)) to minimize the loss function (e.g., mean squared error). As gradient descent progresses, it moves closer to the optimal values until convergence, where the loss stops decreasing.", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                      child: SelectableText("The loss function used here is the sum of squared errors between the predicted values and the actual values. Its is also called the MSE (Mean Squared Error). The equation for finding the MSE is given Below:\n ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: const SelectableText("The loss function used here is the sum of squared errors between the predicted values and the actual values. Its is also called the MSE (Mean Squared Error). The equation for finding the MSE is given Below:\n ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                      child: Center(child: SelectableText("J( θ0 , θ1 ) = 1/n * Σ((hθ(x) - y)^2)", style: TextStyle(backgroundColor: const Color.fromARGB(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: const Center(child: SelectableText("J( θ0 , θ1 ) = 1/n * Σ((hθ(x) - y)^2)", style: TextStyle(backgroundColor: Color.fromARGB(
                                         255, 244, 163, 163), fontSize: 25, fontWeight: FontWeight.bold),)),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                      child: SelectableText("Where hθ(x) is the predicted value of y for a given input x, θ0 and θ1 are the intercept and slope of the regression line, and n is the sample size.\ni.e. hθ(x) = θ0 + θ1 * x", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: const SelectableText("Where hθ(x) is the predicted value of y for a given input x, θ0 and θ1 are the intercept and slope of the regression line, and n is the sample size.\ni.e. hθ(x) = θ0 + θ1 * x", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SelectableText("The minimization the MSE loss function is achieved through gradient descent, which iteratively adjusts the values of θ0 and θ1 to minimize the loss function. ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
-                        ],
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      child: SelectableText('''The minimization the MSE loss function is achieved through gradient descent, which iteratively adjusts the values of θ0 and θ1 to minimize the loss function. ''', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
                     ),
 Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SelectableText("For more on gradient descent, click ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
+                          const SelectableText("For more on gradient descent, click ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),),
                           TextButton(onPressed: (){
                             GoRouter.of(context).go('/gradient-descent-simulator');
-                          }, child: Text('Gradient Descent Simulator'))
+                          }, child: const Text('Gradient Descent'))
                         ],
                       ),
                     ),

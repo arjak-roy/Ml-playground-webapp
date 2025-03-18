@@ -8,7 +8,7 @@ class LinReg extends ChangeNotifier{
   int slope = 0;
   int sampleSize = 0;
   int noise = 1;
-  LinearRegression lr = LinearRegression(epoch: 50000, learningRate: 0.0001 );
+  LinearRegression lr = LinearRegression(epoch: 500, learningRate: 0.01 );
   double mse = 0;
   double r2 = 0;
   double rmse = 0;

@@ -1,6 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mlplayground/provider/Gradient-Descent/GDfit-provider.dart';
 import 'package:provider/provider.dart';

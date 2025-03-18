@@ -2,13 +2,15 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:mlplayground/Algorithms/other/sampleDataThresholding.dart';
 import 'package:mlplayground/Models/line.dart';
 
 class Gdfitprovider extends ChangeNotifier {
+
   bool is_paused = false;
   double _weight = 0;
   double _bias = 0;
-  int epoch = 20000;
+  int epoch = 10000;
   List<double> weightHistory = [];
   List<double> biasHistory = [];
   List<double> history = [];
@@ -18,43 +20,62 @@ class Gdfitprovider extends ChangeNotifier {
   List<LineChartBarData> FlSpots = [];
   int epochNow = 0;
   //Function for graDesc
-  (double, double) gradDesc(
-      List<double> X, List<double> Y, double w, double b) {
-    int n = X.length;
-    double dw = 0;
-    double db = 0;
-    for (int i = 0; i < n; i++) {
-      dw += -(1 / n) * (Y[i] - (w * X[i] + b)) * X[i];
-      db += -(1 / n) * (Y[i] - (w * X[i] + b));
-    }
+  // (double, double) gradDesc(List<double> X, List<double> Y, double w, double b) {
+  //   int n = X.length;
+  //   double dw = 0;
+  //   double db = 0;
+  //   for (int i = 0; i < n; i++) {
+  //     dw += -(1 / n) * (Y[i] - (w * X[i] + b)) * X[i];
+  //     db += -(1 / n) * (Y[i] - (w * X[i] + b));
+  //   }
 
-    double wNow = w - learningRate * dw;
-    double bNow = b - learningRate * db;
-    return (wNow, bNow);
+  //   double wNow = w - learningRate * dw;
+  //   double bNow = b - learningRate * db;
+  //   return (wNow, bNow);
+  // }
+double clip(double value, double threshold) {
+  return value.clamp(-threshold, threshold);
+}
+
+(double, double) gradDesc(List<double> X, List<double> Y, double w, double b) {
+  int n = X.length;
+  double dw = 0;
+  double db = 0;
+  for (int i = 0; i < n; i++) {
+    dw += -(1 / n) * (Y[i] - (w * X[i] + b)) * X[i];
+    db += -(1 / n) * (Y[i] - (w * X[i] + b));
   }
-
+  // Clip gradients
+  dw = clip(dw, 10.0); // Adjust threshold as needed
+  db = clip(db, 10.0);
+  double wNow = w - learningRate * dw;
+  double bNow = b - learningRate * db;
+  return (wNow, bNow);
+}
   //Function for fit
   Future<(double, double)> fit(List<double> X, List<double> Y) async {
-    this.reset();
+    int tick = calculateThreshold(epoch);
+    int tick2 = calculateThreshold2(epoch);
+    reset();
     double w = 0;
     double b = 0;
     for (int i = 0; i <= epoch; i++) {
 
       epochNow = i;
       (w, b) = gradDesc(X, Y, w, b);
-      if (i % 1000 == 0) {
+      if (i % tick == 0) {
 
         print("Epoch: $i, Weight: $w, Bias: $b");
         weightHistory.add(w);
-        await Future.delayed(Duration(microseconds: 200));
+        await Future.delayed(const Duration(microseconds: 200));
         biasHistory.add(b);
-        await Future.delayed(Duration(microseconds: 200));
+        await Future.delayed(const Duration(microseconds: 200));
         history.add(MSEnow(X, Y,b,w));
         print(history);
-        await Future.delayed(Duration(microseconds: 200));
+        await Future.delayed(const Duration(microseconds: 200));
         notifyListeners();
       }
-      if (i % 1000 == 0 && i != 0) {
+      if (i % tick2 == 0 && i != 0) {
         is_paused = true;
         weightChange.add(w);
         biasChange.add(b);
@@ -64,12 +85,12 @@ class Gdfitprovider extends ChangeNotifier {
             spots: line.getFlSpots(),
             barWidth: (i != epoch) ? 1 : 3,
             belowBarData: BarAreaData(show: false),
-            dotData: FlDotData(show: false),
+            dotData: const FlDotData(show: false),
             shadow: (i == epoch)
-                ? Shadow(
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                ? const Shadow(
+                    color: Color.fromARGB(255, 255, 255, 255),
                     blurRadius: 5)
-                : Shadow(),
+                : const Shadow(),
             color: (i == epoch)
                 ? const Color.fromARGB(255, 0, 255, 187)
                 : const Color.fromARGB(176, 5, 218, 255)));

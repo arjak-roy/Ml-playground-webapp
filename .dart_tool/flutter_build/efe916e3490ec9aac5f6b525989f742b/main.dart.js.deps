@@ -197,7 +197,7 @@ file:///D:/Projects/machinelearningsimulator/mlplayground/.dart_tool/flutter_bui
 file:///D:/Projects/machinelearningsimulator/mlplayground/.dart_tool/flutter_build/efe916e3490ec9aac5f6b525989f742b/main.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/.dart_tool/flutter_build/efe916e3490ec9aac5f6b525989f742b/web_plugin_registrant.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Algorithms/Regression/Linear%20Regression/LinearRegression.dart
-file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Algorithms/Regression/Linear%20Regression/LinearRegression_gd.dart
+file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Algorithms/other/sampleDataThresholding.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Models/line.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Models/sample-data-parms.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/Pages/gradientDescent.dart
@@ -214,7 +214,6 @@ file:///D:/Projects/machinelearningsimulator/mlplayground/lib/UI/ontapExpand.dar
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/UI/scatter.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/main.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/provider/Gradient-Descent/GDfit-provider.dart
-file:///D:/Projects/machinelearningsimulator/mlplayground/lib/provider/Gradient-Descent/Model-provider.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/provider/Gradient-Descent/Reg-line-provider.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/provider/Gradient-Descent/sample-data.dart
 file:///D:/Projects/machinelearningsimulator/mlplayground/lib/provider/Line%20Provider/AlgoProvider.dart
